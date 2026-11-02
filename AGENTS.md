@@ -32,6 +32,7 @@ Before telling Gio a task is done, run `pnpm lint`, `pnpm typecheck`, and `pnpm 
 ## Rules that matter most
 
 ### Content integrity (strict)
+
 - **Never invent facts, metrics, results, dates, quotes, or claims.** Use only what is in `docs/content-source.md`. If a fact is missing, leave it out of the page and tell Gio what's needed.
 - No placeholder numbers, no `TODO`, `TBD`, or lorem ipsum in anything that renders on the site.
 - Do not mention anything listed under "Out of scope" in `docs/requirements.md` (SOICT, the Taiwan hackathon result, location preferences, other activities).
@@ -39,26 +40,31 @@ Before telling Gio a task is done, run `pnpm lint`, `pnpm typecheck`, and `pnpm 
 - Do not describe internal details of the internship company's system.
 
 ### Scope
+
 - Build only what the checklist asks for, one section at a time. No extra pages, features, animations, dark mode, blog, or contact form.
 - Do not add a dependency without asking Gio first and explaining why.
 - Keep client-side JavaScript to the components listed in `docs/techspec.md` section 7.
 
 ### Design
+
 - Neo-brutalist/retro style from the references: cream background, near-black text, thick black borders, hard offset shadows.
 - Two accent colors only (red-orange and yellow), used **only as fills behind black text**, never as text color on cream.
 - Fonts: Anton (headings), Space Mono (labels), Inter (body), Pixelify Sans (the name in the hero only).
 - Light mode only.
 
 ### Accessibility
+
 - Visible focus outline on every interactive element, keyboard navigation everywhere, one `<h1>` per page, meaningful alt text, 44px touch targets, WCAG AA contrast. This is a launch gate (Lighthouse 95+ in all categories).
 
 ### Code
+
 - TypeScript strict. Server components by default.
 - Content lives in `content/projects/*.mdx`, validated by the zod schema in `src/lib/schema.ts`.
 - Reuse the shared components in `src/components/ui/` instead of one-off styling.
 - Keep functions and components small and readable. Gio will be asked about this code in interviews, so prefer clear code over clever code and add short comments only where the reason isn't obvious.
 
 ### Git
+
 - Work on a short-lived branch, not `main`. Conventional commit messages (`feat:`, `fix:`, `chore:`, `docs:`), small focused commits.
 - If you change a decision (stack, structure, design, scope), update the relevant doc in the same commit.
 

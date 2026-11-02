@@ -11,12 +11,14 @@
 Get a short internship (December to January) by showing projects clearly and professionally.
 
 **Success criteria (launch gates)**
+
 - Peer review by 2-3 developer friends passes
 - Lighthouse 95+ in all four categories (Performance, Accessibility, Best Practices, SEO), on mobile and desktop
 - A stranger can find the best project and the contact email within 10 seconds on mobile and desktop
 - Every featured project has something a recruiter can see in under a minute (live demo, hosted demo, or video)
 
 **Timing**
+
 - Apply to internships now. The site does not gate applications.
 - Target launch: about November 1, 2026
 
@@ -30,9 +32,11 @@ Get a short internship (December to January) by showing projects clearly and pro
 ## 3. Scope
 
 ### In scope
+
 Home, Projects (index + 3 detail pages), About, Resume, Contact.
 
 ### Out of scope (on purpose)
+
 - SOICT conference details and December travel (handled in interviews)
 - RAITE, Capabara bootcamp, Matsuo-Iwasa course (resume only)
 - Anything about the Taiwan hackathon result
@@ -42,27 +46,29 @@ Home, Projects (index + 3 detail pages), About, Resume, Contact.
 
 ## 4. Tech stack
 
-| Area | Choice |
-|---|---|
-| Framework | Next.js (App Router), static generation, no server logic |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Package manager | pnpm |
-| Content | MDX files in the repo (frontmatter for metadata), no CMS |
-| Quality | ESLint + Prettier |
-| CI | GitHub Actions: lint + build on every push |
-| Hosting | Vercel (preview deployments per branch) |
-| Analytics | Vercel Web Analytics (no cookie banner) |
-| Fonts | `next/font`: Anton, Space Mono, Inter, Pixelify Sans |
+| Area            | Choice                                                   |
+| --------------- | -------------------------------------------------------- |
+| Framework       | Next.js (App Router), static generation, no server logic |
+| Language        | TypeScript                                               |
+| Styling         | Tailwind CSS                                             |
+| Package manager | pnpm                                                     |
+| Content         | MDX files in the repo (frontmatter for metadata), no CMS |
+| Quality         | ESLint + Prettier                                        |
+| CI              | GitHub Actions: lint + build on every push               |
+| Hosting         | Vercel (preview deployments per branch)                  |
+| Analytics       | Vercel Web Analytics (no cookie banner)                  |
+| Fonts           | `next/font`: Anton, Space Mono, Inter, Pixelify Sans     |
 
 ## 5. Pages and requirements
 
 ### 5.1 Home
+
 - Name in pixel font (Pixelify Sans), the headline, two buttons: "View projects" and "Download resume"
 - Three featured projects below, in order: Pop Hop, InstaHAM, Style Finder
 - No intro animations or loading screens
 
 ### 5.2 Projects
+
 - Index page listing the three projects as cards
 - One page per project (`/projects/[slug]`), about 300-500 words, with this structure:
   1. Problem
@@ -72,14 +78,16 @@ Home, Projects (index + 3 detail pages), About, Resume, Contact.
   5. Screenshots (at the top)
   6. Links: live demo or demo video, GitHub repo
 
-| Project | Order | Demo | Notes |
-|---|---|---|---|
-| Pop Hop | 1 | Live (Vercel) | Leads: matches target roles |
-| InstaHAM | 2 | 30-60s demo video | Mobile app; title only, no conference line for now |
-| Style Finder | 3 | Streamlit Community Cloud | Deploy if not already hosted |
+| Project      | Order | Demo                      | Notes                                              |
+| ------------ | ----- | ------------------------- | -------------------------------------------------- |
+| Pop Hop      | 1     | Live (Vercel)             | Leads: matches target roles                        |
+| InstaHAM     | 2     | 30-60s demo video         | Mobile app; title only, no conference line for now |
+| Style Finder | 3     | Streamlit Community Cloud | Deploy if not already hosted                       |
 
 ### 5.3 About
+
 Only these five elements:
+
 1. Short bio (3-4 sentences, own voice)
 2. Skills grouped by area: Frontend, Backend, ML/CV, Tools
 3. Experience: MIS Developer Intern, Inari Amertron Inc. (June to July 2026), described at resume level only, with no internal details or screenshots of the company's system
@@ -89,11 +97,13 @@ Only these five elements:
 Plus the availability line (section 2). A headshot is optional; if there isn't a good one, launch without it.
 
 ### 5.4 Resume
+
 - Clear download button on Home and on the Resume page, plus a simple page, with no embedded PDF
 - Single file: `Gio-Ferreras-Resume.pdf`
 - Public contact details: email, GitHub, LinkedIn only (no phone, no home address)
 
 ### 5.5 Contact
+
 - gioferreras@gmail.com as a `mailto:` link with a copy-to-clipboard button
 - GitHub and LinkedIn links
 - No form
@@ -148,9 +158,9 @@ Plus the availability line (section 2). A headshot is optional; if there isn't a
 
 ## 11. Schedule
 
-| When | Focus |
-|---|---|
-| Weekend 1 (Oct 24-25) | Content prep, project setup, Home and Projects pages |
+| When                     | Focus                                                                                          |
+| ------------------------ | ---------------------------------------------------------------------------------------------- |
+| Weekend 1 (Oct 24-25)    | Content prep, project setup, Home and Projects pages                                           |
 | Weekend 2 (Oct 31-Nov 1) | About, Resume, Contact, polish, Lighthouse and accessibility pass, peer review, domain, launch |
 
 ## 12. Working agreement

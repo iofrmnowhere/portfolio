@@ -4,7 +4,7 @@
 **Last updated:** October 21, 2026
 **Companion docs:** `requirements.md` (what and why), `weekend-1-checklist.md` (tasks)
 
-This document defines *how* the site is built. If it conflicts with `requirements.md`, the requirements win and this file gets updated.
+This document defines _how_ the site is built. If it conflicts with `requirements.md`, the requirements win and this file gets updated.
 
 > **Version note:** package versions are not pinned here. Use the latest stable releases at scaffold time and commit the lockfile. Where a tool's setup changed between major versions (notably Tailwind), check the scaffold output and adapt the snippets below.
 
@@ -28,6 +28,7 @@ Vercel CDN
 ```
 
 **Principles**
+
 - Server components by default. Client components only where interaction requires it.
 - Content lives in the repo as MDX, validated at build time. A bad frontmatter field fails the build.
 - Everything a recruiter sees is pre-rendered HTML, so it is fast and works without JavaScript.
@@ -35,19 +36,19 @@ Vercel CDN
 
 ## 2. Stack
 
-| Concern | Choice | Notes |
-|---|---|---|
-| Framework | Next.js, App Router | Static generation |
-| Language | TypeScript, `strict: true` | Plus `noUncheckedIndexedAccess` |
-| Styling | Tailwind CSS | Tokens defined once (section 6) |
-| Content | MDX + `gray-matter` + `next-mdx-remote` (RSC build) | Frontmatter validated with `zod` |
-| Fonts | `next/font/google` | Anton, Space Mono, Inter, Pixelify Sans |
-| Images | `next/image` | Local files in `public/` or colocated imports |
-| Analytics | `@vercel/analytics` | Cookie-free, no consent banner |
-| Lint/format | ESLint (Next config) + Prettier + `prettier-plugin-tailwindcss` | |
-| CI | GitHub Actions | lint, typecheck, build |
-| Hosting | Vercel | Previews per branch, production from `main` |
-| Package manager | pnpm | Pin via `packageManager` in `package.json` |
+| Concern         | Choice                                                          | Notes                                         |
+| --------------- | --------------------------------------------------------------- | --------------------------------------------- |
+| Framework       | Next.js, App Router                                             | Static generation                             |
+| Language        | TypeScript, `strict: true`                                      | Plus `noUncheckedIndexedAccess`               |
+| Styling         | Tailwind CSS                                                    | Tokens defined once (section 6)               |
+| Content         | MDX + `gray-matter` + `next-mdx-remote` (RSC build)             | Frontmatter validated with `zod`              |
+| Fonts           | `next/font/google`                                              | Anton, Space Mono, Inter, Pixelify Sans       |
+| Images          | `next/image`                                                    | Local files in `public/` or colocated imports |
+| Analytics       | `@vercel/analytics`                                             | Cookie-free, no consent banner                |
+| Lint/format     | ESLint (Next config) + Prettier + `prettier-plugin-tailwindcss` |                                               |
+| CI              | GitHub Actions                                                  | lint, typecheck, build                        |
+| Hosting         | Vercel                                                          | Previews per branch, production from `main`   |
+| Package manager | pnpm                                                            | Pin via `packageManager` in `package.json`    |
 
 ## 3. Repository structure
 
@@ -96,17 +97,17 @@ gioferreras-portfolio/
 
 ## 4. Routes
 
-| Route | Rendering | Notes |
-|---|---|---|
-| `/` | Static | Hero + featured projects |
-| `/projects` | Static | Cards sorted by `order` |
-| `/projects/[slug]` | Static (SSG) | `generateStaticParams`; `dynamicParams = false` so unknown slugs 404 |
-| `/about` | Static | Content from components, not MDX |
-| `/resume` | Static | Download button + short page |
-| `/contact` | Static | One small client component (copy button) |
-| `/opengraph-image` | Static at build | `next/og` `ImageResponse` |
-| `/sitemap.xml`, `/robots.txt` | Static | From `sitemap.ts` and `robots.ts` |
-| `*` | Static | `not-found.tsx` |
+| Route                         | Rendering       | Notes                                                                                                          |
+| ----------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
+| `/`                           | Static          | Hero + featured projects                                                                                       |
+| `/projects`                   | Static          | Cards sorted by `order`                                                                                        |
+| `/projects/[slug]`            | Static (SSG)    | `generateStaticParams`; unknown slugs 404 via `notFound()` (Next 16 `cacheComponents` forbids `dynamicParams`) |
+| `/about`                      | Static          | Content from components, not MDX                                                                               |
+| `/resume`                     | Static          | Download button + short page                                                                                   |
+| `/contact`                    | Static          | One small client component (copy button)                                                                       |
+| `/opengraph-image`            | Static at build | `next/og` `ImageResponse`                                                                                      |
+| `/sitemap.xml`, `/robots.txt` | Static          | From `sitemap.ts` and `robots.ts`                                                                              |
+| `*`                           | Static          | `not-found.tsx`                                                                                                |
 
 ## 5. Content model
 
@@ -118,24 +119,25 @@ import { z } from "zod";
 export const projectSchema = z.object({
   title: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9-]+$/),
-  summary: z.string().max(180),           // card + meta description
+  summary: z.string().max(180), // card + meta description
   year: z.number().int(),
-  order: z.number().int(),                // 1 = first on the site
+  order: z.number().int(), // 1 = first on the site
   stack: z.array(z.string()).min(1),
-  cover: z.object({ src: z.string(), alt: z.string() }),
+  cover: z.object({ src: z.string(), alt: z.string() }).optional(),
   links: z.object({
-    demo: z.string().url().optional(),    // live site or hosted demo
-    video: z.string().url().optional(),   // e.g. InstaHAM demo
+    demo: z.string().url().optional(), // live site or hosted demo
+    video: z.string().url().optional(), // e.g. InstaHAM demo
     repo: z.string().url(),
   }),
-  role: z.array(z.string()).min(1).max(4), // "My role" bullets
-  facts: z.array(z.string()).optional(),   // verifiable facts or metrics; omit section if absent
+  role: z.array(z.string()).min(1).max(4).optional(), // "My role" bullets — optional until Gio fills content-source.md; section omitted, never stubbed
+  facts: z.array(z.string()).optional(), // verifiable facts or metrics; omit section if absent
 });
 
 export type ProjectMeta = z.infer<typeof projectSchema>;
 ```
 
 **Rules enforced by the schema and the loader**
+
 - `slug` must match the filename.
 - At least one of `demo` or `video` should exist before launch (checked by a build-time warning, not an error, so drafts can build).
 - `facts` is optional. If absent, the page simply renders no metrics section, so nothing is ever a placeholder.
@@ -143,6 +145,7 @@ export type ProjectMeta = z.infer<typeof projectSchema>;
 ### 5.2 Loader (`src/lib/projects.ts`)
 
 Responsibilities:
+
 1. Read all `content/projects/*.mdx` with `fs`.
 2. Parse with `gray-matter`, validate with `projectSchema`, throw a clear error naming the file on failure.
 3. Return `{ meta, content }[]` sorted by `order`.
@@ -156,7 +159,9 @@ Each project file follows the same headings, rendered with shared MDX components
 
 ```mdx
 ## Problem
+
 ## Key technical decisions
+
 ## Outcome
 ```
 
@@ -174,7 +179,7 @@ Defined once in `globals.css`. With Tailwind v4 (CSS-first config) this is an `@
 @theme {
   --color-cream: #f4efe3;
   --color-ink: #111111;
-  --color-accent-red: #e5372b;     /* verify contrast with ink text */
+  --color-accent-red: #e5372b; /* verify contrast with ink text */
   --color-accent-yellow: #f5c542;
 
   --font-display: var(--font-anton), ui-sans-serif, system-ui;
@@ -203,30 +208,49 @@ Hex values above are starting points. The contrast check in section 9 decides th
 ```tsx
 import { Anton, Space_Mono, Inter, Pixelify_Sans } from "next/font/google";
 
-const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton", display: "swap" });
-const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-space-mono", display: "swap" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const pixelify = Pixelify_Sans({ subsets: ["latin"], weight: "400", variable: "--font-pixelify", display: "swap" });
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-anton",
+  display: "swap",
+});
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
+  display: "swap",
+});
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+const pixelify = Pixelify_Sans({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-pixelify",
+  display: "swap",
+});
 ```
 
 Apply all four variable classes on `<html>`. Load Pixelify with a small `subsets` footprint, since it is used for one line of text. Confirm each font's available weights in the scaffold's type errors if a weight is rejected.
 
 ## 7. Components
 
-| Component | Type | Key props | Notes |
-|---|---|---|---|
-| `Container` | Server | `as?`, `className` | Max width, horizontal padding |
-| `Button` | Server | `variant: "primary" \| "secondary"`, `href?`, `download?` | Renders `<a>` or `<button>`; visible focus ring |
-| `Tag` | Server | `children`, `bracketed?` | Stack chips; `[ LABEL ]` style |
-| `Card` | Server | `as?`, `className` | Border + shadow |
-| `SectionHeading` | Server | `level`, `children` | Correct heading level; styling decoupled from level |
-| `Header` | Server | none | Wraps `MobileNav` |
-| `MobileNav` | **Client** | `links` | Menu toggle; `aria-expanded`, `aria-controls`, closes on route change and Escape |
-| `Footer` | Server | none | Email, GitHub, LinkedIn |
-| `SkipLink` | Server | none | First focusable element |
-| `ProjectCard` | Server | `meta` | Whole card is one link; one `<h3>` |
-| `ProjectLinks` | Server | `links` | Demo, video, repo |
-| `CopyEmailButton` | **Client** | `email` | `navigator.clipboard`, with a visible "Copied" state announced via `aria-live="polite"`; falls back to the `mailto:` link if clipboard is unavailable |
+| Component         | Type       | Key props                                                 | Notes                                                                                                                                                 |
+| ----------------- | ---------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Container`       | Server     | `as?`, `className`                                        | Max width, horizontal padding                                                                                                                         |
+| `Button`          | Server     | `variant: "primary" \| "secondary"`, `href?`, `download?` | Renders `<Link>` (internal), `<a>` (external), or `<button>`; visible focus ring                                                                      |
+| `Tag`             | Server     | `children`, `bracketed?`                                  | Stack chips; `[ LABEL ]` style                                                                                                                        |
+| `Card`            | Server     | `as?`, `className`                                        | Border + shadow                                                                                                                                       |
+| `SectionHeading`  | Server     | `level`, `children`                                       | Correct heading level; styling decoupled from level                                                                                                   |
+| `Header`          | Server     | none                                                      | Wraps `MobileNav`                                                                                                                                     |
+| `MobileNav`       | **Client** | `links`                                                   | Menu toggle; `aria-expanded`, `aria-controls`, closes on link click and Escape (shortcut: back/forward does not close it)                             |
+| `Footer`          | Server     | none                                                      | Email, GitHub, LinkedIn                                                                                                                               |
+| `SkipLink`        | Server     | none                                                      | First focusable element                                                                                                                               |
+| `ProjectCard`     | Server     | `meta`                                                    | Whole card is one link; one `<h3>`                                                                                                                    |
+| `ProjectLinks`    | Server     | `links`                                                   | Demo, video, repo                                                                                                                                     |
+| `CopyEmailButton` | **Client** | `email`                                                   | `navigator.clipboard`, with a visible "Copied" state announced via `aria-live="polite"`; falls back to the `mailto:` link if clipboard is unavailable |
 
 Client JavaScript on the whole site is limited to `MobileNav`, `CopyEmailButton`, and the Vercel Analytics script.
 
@@ -237,12 +261,13 @@ One file holds anything reused across pages, so changes happen in one place:
 ```ts
 export const site = {
   name: "Gio Ferreras",
-  headline: "Computer Science student building full-stack web apps and computer vision tools",
+  headline:
+    "Computer Science student building full-stack web apps and computer vision tools",
   availability: "Open to internship opportunities",
   email: "gioferreras@gmail.com",
-  url: "https://gioferreras.dev",          // update if a fallback domain is used
-  github: "",                               // fill in
-  linkedin: "",                             // fill in
+  url: "https://gioferreras.dev", // update if a fallback domain is used
+  github: "", // fill in
+  linkedin: "", // fill in
   resumePath: "/Gio-Ferreras-Resume.pdf",
 } as const;
 ```
@@ -273,14 +298,14 @@ Empty `github` / `linkedin` values fail a build-time check before production dep
 
 ## 11. Performance budget
 
-| Metric | Target |
-|---|---|
-| Lighthouse (all four categories, mobile) | 95+ |
-| LCP | under 2.0s on mobile profile |
-| CLS | under 0.05 |
-| Total JS on Home (compressed) | as small as the framework allows; no extra client libraries beyond analytics |
-| Images | Use `next/image` with explicit `width`/`height` or `fill` with sized containers; `priority` only on the single above-the-fold image; screenshots ≤ 1600px wide before upload |
-| Fonts | Four families, `display: swap`, subsets limited to Latin |
+| Metric                                   | Target                                                                                                                                                                       |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lighthouse (all four categories, mobile) | 95+                                                                                                                                                                          |
+| LCP                                      | under 2.0s on mobile profile                                                                                                                                                 |
+| CLS                                      | under 0.05                                                                                                                                                                   |
+| Total JS on Home (compressed)            | as small as the framework allows; no extra client libraries beyond analytics                                                                                                 |
+| Images                                   | Use `next/image` with explicit `width`/`height` or `fill` with sized containers; `priority` only on the single above-the-fold image; screenshots ≤ 1600px wide before upload |
+| Fonts                                    | Four families, `display: swap`, subsets limited to Latin                                                                                                                     |
 
 Rule of thumb: if a feature needs a new client-side library, it probably does not belong on this site.
 
@@ -335,17 +360,17 @@ Add `"typecheck": "tsc --noEmit"` to `package.json`. Check the current major ver
 
 No unit-test suite. The site is content and layout, so these checks carry the weight:
 
-| Check | When | How |
-|---|---|---|
-| Lint, typecheck, build | Every push | CI |
-| Frontmatter validation | Every build | zod in the loader |
-| Keyboard-only pass | Each page, before each merge to `main` | Tab through everything; focus always visible; menus open and close with keyboard |
-| Responsive pass | Before launch | 375px, 768px, 1280px; no horizontal scroll |
-| Automated a11y | Before launch | Lighthouse and the axe browser extension on every page |
-| Lighthouse | Before launch | Mobile and desktop, production URL, incognito |
-| Real devices | Before launch | One iPhone or Android, one desktop browser besides Chrome |
-| Link check | Before launch | Click every demo, repo, resume, and mailto link on the production site |
-| Peer review | Before launch | 2-3 developer friends run the 10-second test |
+| Check                  | When                                   | How                                                                              |
+| ---------------------- | -------------------------------------- | -------------------------------------------------------------------------------- |
+| Lint, typecheck, build | Every push                             | CI                                                                               |
+| Frontmatter validation | Every build                            | zod in the loader                                                                |
+| Keyboard-only pass     | Each page, before each merge to `main` | Tab through everything; focus always visible; menus open and close with keyboard |
+| Responsive pass        | Before launch                          | 375px, 768px, 1280px; no horizontal scroll                                       |
+| Automated a11y         | Before launch                          | Lighthouse and the axe browser extension on every page                           |
+| Lighthouse             | Before launch                          | Mobile and desktop, production URL, incognito                                    |
+| Real devices           | Before launch                          | One iPhone or Android, one desktop browser besides Chrome                        |
+| Link check             | Before launch                          | Click every demo, repo, resume, and mailto link on the production site           |
+| Peer review            | Before launch                          | 2-3 developer friends run the 10-second test                                     |
 
 ## 16. Git workflow
 
@@ -356,15 +381,15 @@ No unit-test suite. The site is content and layout, so these checks carry the we
 
 ## 17. Risks and mitigations
 
-| Risk | Mitigation |
-|---|---|
-| Neo-brutalist colors fail contrast | Check accent fills early (weekend 1, step 5); adjust accent hex values |
-| Content isn't ready when code is | Build against real draft text; the build checks block launch with placeholders |
-| Too many fonts hurt performance | Latin subsets only, `display: swap`; drop a weight or family if Lighthouse flags it |
-| Large screenshots slow the page | Resize before upload; `next/image` with correct `sizes` |
-| MDX tooling friction | Keep to the small `gray-matter` + `next-mdx-remote` setup; avoid plugin chains |
-| Scope creep (animations, dark mode, blog) | Parked in `requirements.md` section 13 until after launch |
-| Team repos not under your profile | Fork or transfer before launch (see requirements section 10) |
+| Risk                                      | Mitigation                                                                          |
+| ----------------------------------------- | ----------------------------------------------------------------------------------- |
+| Neo-brutalist colors fail contrast        | Check accent fills early (weekend 1, step 5); adjust accent hex values              |
+| Content isn't ready when code is          | Build against real draft text; the build checks block launch with placeholders      |
+| Too many fonts hurt performance           | Latin subsets only, `display: swap`; drop a weight or family if Lighthouse flags it |
+| Large screenshots slow the page           | Resize before upload; `next/image` with correct `sizes`                             |
+| MDX tooling friction                      | Keep to the small `gray-matter` + `next-mdx-remote` setup; avoid plugin chains      |
+| Scope creep (animations, dark mode, blog) | Parked in `requirements.md` section 13 until after launch                           |
+| Team repos not under your profile         | Fork or transfer before launch (see requirements section 10)                        |
 
 ## 18. Out of scope for this spec
 
