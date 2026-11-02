@@ -26,14 +26,15 @@ Prompts to help write it: What do you build? What are you studying? What kind of
 
 Grouped by area. Start from the stacks on the resume, then edit.
 
-- **Frontend:** React, Next.js, TypeScript, Tailwind CSS, Flutter, Dart *(confirm)*
-- **Backend:** Node.js, Prisma, PostgreSQL, JWT authentication *(confirm)*
-- **ML / CV:** Python, YOLO, GhostNet, ONNX, XGBoost, Gaussian Mixture Model, Streamlit *(confirm)*
-- **Tools:** Git, GitHub, Vercel, C++ *(confirm; move C++ if you'd rather list it under ML/CV)*
+- **Frontend:** React, Next.js, TypeScript, Tailwind CSS, Flutter, Dart _(confirm)_
+- **Backend:** Node.js, Prisma, PostgreSQL, JWT authentication _(confirm)_
+- **ML / CV:** Python, YOLO, GhostNet, ONNX, XGBoost, Gaussian Mixture Model, Streamlit _(confirm)_
+- **Tools:** Git, GitHub, Vercel, C++ _(confirm; move C++ if you'd rather list it under ML/CV)_
 
 ## 4. Experience (About page, resume-level only)
 
 **MIS Developer Intern**, Inari Amertron Inc., Clark Freeport, Angeles City, Pampanga. June 2026 to July 2026.
+
 - Redesigned and modernized a document tracking system used by the company while maintaining the familiar system flow.
 - Applied SDLC to identify software gaps and usability issues to improve upon.
 - Presented the proposed redesign of the document tracking system to department heads and engineers to verify.
