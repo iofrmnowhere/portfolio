@@ -5,7 +5,7 @@ export const site = {
   availability: "Open to internship opportunities",
   email: "gioferreras@gmail.com",
   url: "https://gioferreras.dev", // updated if a fallback domain is bought
-  github: "", // FILL IN before launch (build check fails on production if empty)
-  linkedin: "", // FILL IN before launch (build check fails on production if empty)
+  github: "https://github.com/iofrmnowhere", // FILL IN before launch (build check fails on production if empty)
+  linkedin: "https://www.linkedin.com/in/gio-ferreras-a47790389/", // FILL IN before launch (build check fails on production if empty)
   resumePath: "/Gio-Ferreras-Resume.pdf",
 } as const;
