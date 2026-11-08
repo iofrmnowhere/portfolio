@@ -1,7 +1,7 @@
 # Portfolio Website: Requirements
 
 **Owner:** Gio Ferreras
-**Last updated:** October 21, 2026
+**Last updated:** November 6, 2026
 **Status:** Confirmed, ready to build
 
 ---
@@ -33,7 +33,7 @@ Get a short internship (December to January) by showing projects clearly and pro
 
 ### In scope
 
-Home, Projects (index + 3 detail pages), About, Resume, Contact.
+Home, Projects (index + 4 detail pages), About, Resume, Contact.
 
 ### Out of scope (on purpose)
 
@@ -69,7 +69,7 @@ Home, Projects (index + 3 detail pages), About, Resume, Contact.
 
 ### 5.2 Projects
 
-- Index page listing the three projects as cards
+- Index page listing the four projects as cards
 - One page per project (`/projects/[slug]`), about 300-500 words, with this structure:
   1. Problem
   2. **My role** (2-3 specific things Gio personally built, linked to commits or PRs where possible)
@@ -78,11 +78,12 @@ Home, Projects (index + 3 detail pages), About, Resume, Contact.
   5. Screenshots (at the top)
   6. Links: live demo or demo video, GitHub repo
 
-| Project      | Order | Demo                      | Notes                                              |
-| ------------ | ----- | ------------------------- | -------------------------------------------------- |
-| Pop Hop      | 1     | Live (Vercel)             | Leads: matches target roles                        |
-| InstaHAM     | 2     | 30-60s demo video         | Mobile app; title only, no conference line for now |
-| Style Finder | 3     | Streamlit Community Cloud | Deploy if not already hosted                       |
+| Project        | Order | Demo                      | Notes                                              |
+| -------------- | ----- | ------------------------- | -------------------------------------------------- |
+| Pop Hop        | 1     | Live (Vercel)             | Leads: matches target roles                        |
+| InstaHAM       | 2     | 30-60s demo video         | Mobile app; title only, no conference line for now |
+| Style Finder   | 3     | Streamlit Community Cloud | Deploy if not already hosted                       |
+| Stray on Track | 4     | Figma prototype           | Design project; projects index only, not on Home   |
 
 ### 5.3 About
 
@@ -171,4 +172,4 @@ Plus the availability line (section 2). A headshot is optional; if there isn't a
 
 ## 13. Possible later additions
 
-Dark mode, blog, extra projects, SOICT paper line on InstaHAM (once the title and publication status are final), contact form.
+Dark mode, blog, SOICT paper line on InstaHAM (once the title and publication status are final), contact form.
