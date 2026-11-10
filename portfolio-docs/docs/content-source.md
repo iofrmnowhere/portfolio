@@ -12,8 +12,8 @@ Facts below were taken from Gio's own resume text. Gio: review everything and co
 - **Headline:** Computer Science student building full-stack web apps and computer vision tools
 - **Availability line:** Open to internship opportunities
 - **Email:** gioferreras@gmail.com
-- **GitHub profile URL:** FILL IN
-- **LinkedIn URL:** FILL IN
+- **GitHub profile URL:** https://github.com/iofrmnowhere
+- **LinkedIn URL:** https://www.linkedin.com/in/gio-ferreras-a47790389/
 - **Headshot:** FILL IN (yes/no; if no, launch without one)
 
 ## 2. Bio (About page)
@@ -26,10 +26,12 @@ Prompts to help write it: What do you build? What are you studying? What kind of
 
 Grouped by area. Start from the stacks on the resume, then edit.
 
-- **Frontend:** React, Next.js, TypeScript, Tailwind CSS, Flutter, Dart _(confirm)_
-- **Backend:** Node.js, Prisma, PostgreSQL, JWT authentication _(confirm)_
-- **ML / CV:** Python, YOLO, GhostNet, ONNX, XGBoost, Gaussian Mixture Model, Streamlit _(confirm)_
-- **Tools:** Git, GitHub, Vercel, C++ _(confirm; move C++ if you'd rather list it under ML/CV)_
+- **Frontend:** React, Next.js, TypeScript, Tailwind CSS, Flutter, Dart
+- **Backend:** Node.js, Prisma, PostgreSQL, JWT authentication
+- **ML / CV:** Python, YOLO, GhostNet, ONNX, XGBoost, Gaussian Mixture Model, Streamlit
+- **Tools:** Git, GitHub, Vercel, C++
+
+Confirmed 2026-11-06 against the resume's TECHNICAL SKILLS section. Resume-only skills not yet grouped for the site (Gio to decide whether to add): Java, Firebase, Figma, NumPy, Pandas, Scikit-learn.
 
 ## 4. Experience (About page, resume-level only)
 
@@ -62,7 +64,7 @@ SOICT 2026, December travel dates, RAITE 2025, Capabara bootcamp, Matsuo-Iwasa c
 
 ## 8. Projects
 
-Order on the site: Pop Hop, InstaHAM, Style Finder.
+Order on the site: Pop Hop, InstaHAM, Style Finder. Stray on Track is a fourth project; it appears on the projects index and its own detail page only, never in the Home featured section.
 
 ### 8.1 Pop Hop (April 2026)
 
@@ -114,6 +116,23 @@ Order on the site: Pop Hop, InstaHAM, Style Finder.
 - **Key technical decisions and why:** FILL IN
 - **Outcome / verifiable facts (e.g. dataset size, number of features used):** FILL IN
 - **Screenshots (3-4):** FILL IN
+
+### 8.4 Stray on Track (May 2026)
+
+Scope note (2026-11-06): Gio approved adding this as a fourth project on the
+projects index only — not featured on Home.
+
+- **Stack:** Figma, UI/UX
+- **Demo:** Figma prototype — https://www.figma.com/proto/Ns4Dqly6BvDz0eQqUQWrE5/Stray-on-Track--After-Sido-?node-id=4-128&starting-point-node-id=2%3A14&t=gHtqh4FWhamf7Gsc-1
+- **Repo:** none (design prototype; no code repo exists)
+- **Team:** 4 people, design team led by Gio
+- **Facts from resume:**
+  - Interactive mobile app prototype focused on helping track and take care of stray animals around Angeles City
+  - Created user flows, wireframes, and high-fidelity UI using Figma
+  - Led the 4-person design team and contributed significantly to creating a shared style and component system
+- **Problem (1-2 sentences):** FILL IN
+- **Key technical decisions and why:** FILL IN
+- **Screenshots:** FILL IN
 
 ---
 

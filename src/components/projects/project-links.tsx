@@ -4,7 +4,7 @@ type ProjectLinksProps = {
   links: {
     demo?: string;
     video?: string;
-    repo: string;
+    repo?: string;
   };
 };
 
@@ -21,9 +21,11 @@ export function ProjectLinks({ links }: ProjectLinksProps) {
           Demo video
         </Button>
       )}
-      <Button href={links.repo} external variant="secondary">
-        GitHub repo
-      </Button>
+      {links.repo && (
+        <Button href={links.repo} external variant="secondary">
+          GitHub repo
+        </Button>
+      )}
     </div>
   );
 }

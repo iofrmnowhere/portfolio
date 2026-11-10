@@ -1,9 +1,10 @@
 import { z } from "zod";
 
+// Repo is optional: design-only projects (e.g. Stray on Track) have no code repo.
 const linksSchema = z.object({
   demo: z.string().url().optional(),
   video: z.string().url().optional(),
-  repo: z.string().url(),
+  repo: z.string().url().optional(),
 });
 
 const coverSchema = z.object({
