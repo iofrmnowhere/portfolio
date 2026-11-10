@@ -31,7 +31,11 @@ export function MobileNav({ links }: MobileNavProps) {
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen((value) => !value)}
-        className="border-ink bg-cream text-ink shadow-brutal hover:shadow-brutal-sm inline-flex min-h-11 items-center border-2 px-4 font-mono text-sm uppercase transition-transform hover:translate-x-0.5 hover:translate-y-0.5"
+        className={`${
+          open
+            ? "border-ink bg-cream shadow-brutal"
+            : "hover:border-ink hover:bg-cream hover:shadow-brutal-sm border-transparent bg-transparent"
+        } text-ink inline-flex min-h-11 items-center border-2 px-4 font-mono text-sm uppercase transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:translate-x-0.5 hover:translate-y-0.5`}
       >
         {open ? "Close" : "Menu"}
       </button>

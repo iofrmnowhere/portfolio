@@ -9,7 +9,7 @@ const variantClasses: Record<Variant, string> = {
 };
 
 const baseClasses =
-  "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 border-2 border-ink px-4 font-mono text-sm uppercase text-ink shadow-brutal transition-transform hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-brutal-sm";
+  "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 border-2 border-ink px-4 font-mono text-sm uppercase text-ink shadow-brutal transition-[box-shadow,transform] duration-150 ease-out hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-brutal-sm";
 
 type ButtonProps = {
   variant: Variant;

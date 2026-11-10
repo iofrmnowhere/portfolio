@@ -23,7 +23,7 @@ export function Header() {
         >
           {site.name}
         </Link>
-        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-2 md:flex">
           {NAV_LINKS.map((link) => (
             <NavLink
               key={link.href}
