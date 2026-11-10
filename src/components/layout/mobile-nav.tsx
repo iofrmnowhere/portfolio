@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-type NavLink = { href: string; label: string };
+import { NavLink } from "@/components/layout/nav-link";
+
+type NavItem = { href: string; label: string };
 
 type MobileNavProps = {
-  links: NavLink[];
+  links: NavItem[];
 };
 
 export function MobileNav({ links }: MobileNavProps) {
@@ -29,7 +31,11 @@ export function MobileNav({ links }: MobileNavProps) {
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen((value) => !value)}
-        className="border-ink bg-cream text-ink shadow-brutal hover:shadow-brutal-sm inline-flex min-h-11 items-center border-2 px-4 font-mono text-sm uppercase transition-transform hover:translate-x-0.5 hover:translate-y-0.5"
+        className={`${
+          open
+            ? "border-ink bg-cream shadow-brutal"
+            : "hover:border-ink hover:bg-cream hover:shadow-brutal-sm border-transparent bg-transparent"
+        } text-ink inline-flex min-h-11 items-center border-2 px-4 font-mono text-sm uppercase transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:translate-x-0.5 hover:translate-y-0.5`}
       >
         {open ? "Close" : "Menu"}
       </button>
@@ -45,13 +51,12 @@ export function MobileNav({ links }: MobileNavProps) {
                 key={link.href}
                 className="border-ink border-b-2 last:border-b-0"
               >
-                <a
+                <NavLink
                   href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-4 py-4 font-mono text-sm uppercase"
-                >
-                  {link.label}
-                </a>
+                  label={link.label}
+                  variant="mobile"
+                  onNavigate={() => setOpen(false)}
+                />
               </li>
             ))}
           </ul>
