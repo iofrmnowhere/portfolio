@@ -16,6 +16,7 @@ type ButtonProps = {
   href?: string;
   download?: string;
   external?: boolean;
+  onClick?: () => void;
   className?: string;
   children: ReactNode;
 };
@@ -25,6 +26,7 @@ export function Button({
   href,
   download,
   external,
+  onClick,
   className = "",
   children,
 }: ButtonProps) {
@@ -50,7 +52,7 @@ export function Button({
     );
   }
   return (
-    <button type="button" className={classNameFinal}>
+    <button type="button" onClick={onClick} className={classNameFinal}>
       {children}
     </button>
   );

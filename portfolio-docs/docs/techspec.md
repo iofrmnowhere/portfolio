@@ -108,6 +108,7 @@ gioferreras-portfolio/
 | `/opengraph-image`            | Static at build | `next/og` `ImageResponse`                                                                                      |
 | `/sitemap.xml`, `/robots.txt` | Static          | From `sitemap.ts` and `robots.ts`                                                                              |
 | `*`                           | Static          | `not-found.tsx`                                                                                                |
+| `*` (runtime errors)          | Client boundary | `error.tsx`: styled fallback with a "Try again" reset button                                                   |
 
 ## 5. Content model
 
@@ -252,7 +253,7 @@ Apply all four variable classes on `<html>`. Load Pixelify with a small `subsets
 | `ProjectLinks`    | Server     | `links`                                                   | Demo, video, repo                                                                                                                                     |
 | `CopyEmailButton` | **Client** | `email`                                                   | `navigator.clipboard`, with a visible "Copied" state announced via `aria-live="polite"`; falls back to the `mailto:` link if clipboard is unavailable |
 
-Client JavaScript on the whole site is limited to `MobileNav`, `CopyEmailButton`, and the Vercel Analytics script.
+Client JavaScript on the whole site is limited to `MobileNav`, `CopyEmailButton`, the `error.tsx` error boundary (with its "Try again" reset button), and the Vercel Analytics script. The boundary was added deliberately (Gio-approved): a failed route render must not show Next's default screen.
 
 ## 8. Site constants (`src/lib/site.ts`)
 

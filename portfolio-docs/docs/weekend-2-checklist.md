@@ -51,7 +51,7 @@ Prerequisite: weekend 1 is done (see `weekend-1-checklist.md`) and `docs/content
 - [ ] `generateMetadata` for project pages
 - [ ] Open Graph image (`opengraph-image.tsx`)
 - [ ] `sitemap.ts` and `robots.ts`
-- [ ] Favicon and custom 404 page
+  - [x] Favicon and custom 404 page
 - [ ] Build-time content checks working (frontmatter validation, no `TODO`/`TBD`/`lorem`, social links not empty, resume file exists)
 
 ### 5. Content pass on project pages
