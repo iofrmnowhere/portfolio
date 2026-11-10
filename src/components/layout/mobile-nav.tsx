@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-type NavLink = { href: string; label: string };
+import { NavLink } from "@/components/layout/nav-link";
+
+type NavItem = { href: string; label: string };
 
 type MobileNavProps = {
-  links: NavLink[];
+  links: NavItem[];
 };
 
 export function MobileNav({ links }: MobileNavProps) {
@@ -45,13 +47,12 @@ export function MobileNav({ links }: MobileNavProps) {
                 key={link.href}
                 className="border-ink border-b-2 last:border-b-0"
               >
-                <a
+                <NavLink
                   href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block px-4 py-4 font-mono text-sm uppercase"
-                >
-                  {link.label}
-                </a>
+                  label={link.label}
+                  variant="mobile"
+                  onNavigate={() => setOpen(false)}
+                />
               </li>
             ))}
           </ul>

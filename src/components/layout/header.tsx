@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { NavLink } from "@/components/layout/nav-link";
 import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
 
@@ -22,15 +23,14 @@ export function Header() {
         >
           {site.name}
         </Link>
-        <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
           {NAV_LINKS.map((link) => (
-            <Link
+            <NavLink
               key={link.href}
               href={link.href}
-              className="py-3 font-mono text-sm uppercase"
-            >
-              {link.label}
-            </Link>
+              label={link.label}
+              variant="desktop"
+            />
           ))}
         </nav>
         <MobileNav links={[...NAV_LINKS]} />
